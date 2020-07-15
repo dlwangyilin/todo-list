@@ -1,55 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models/index');
+const helpers = require('../helpers/todos');
 
-router.get('/', (req, res) => {
-    db.Todo.find()
-        .then(todos => {
-            res.json(todos);
-        })
-        .catch(err => {
-            res.send(err);
-        })
-} );
+router.get('/', helpers.getTodos);
 
-router.post('/', (req, res) => {
-    db.Todo.create(req.body)
-        .then(newTodo => {
-            res.status(201).json(newTodo);
-        })
-        .catch(err => {
-            console.log(err);
-        })
-});
+router.post('/', helpers.createTodo);
 
-router.get('/:todoId', (req, res) => {
-    db.Todo.findById(req.params.todoId)
-        .then(foundTodo => {
-            res.json(foundTodo)
-        })
-        .catch(err => {
-            res.send(err);
-        })
-});
+router.get('/:todoId', helpers.getTodo);
 
-router.put('/:todoId', (req,res) => {
-    db.Todo.findOneAndUpdate({_id: req.params.todoId}, req.body, {new: true})
-        .then(todo => {
-            res.json(todo);
-        })
-        .catch(err => {
-            res.send(err);
-        });
-});
+router.put('/:todoId', helpers.updateTodo);
 
-router.delete('/:todoId', (req, res) => {
-    db.Todo.remove({_id: req.params.todoId})
-        .then(() => {
-            res.json({message: 'We delete it'});
-        })
-        .catch(err => {
-            console.log(err);
-        })
-})
+router.delete('/:todoId', helpers.deleteTodo);
 
 module.exports = router;
