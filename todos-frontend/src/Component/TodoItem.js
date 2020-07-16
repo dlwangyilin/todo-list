@@ -1,7 +1,8 @@
 import React from "react";
+import classes from './TodoItem.module.css';
 
 const TodoItem = ({name, completed, onDelete, onToggle}) => (
-    <li>
+    <li className={classes.task}>
         <span
         style={{
             textDecoration: completed ? 'line-through' : 'none'
@@ -9,7 +10,7 @@ const TodoItem = ({name, completed, onDelete, onToggle}) => (
         onClick={onToggle}>
         {name}
         </span>
-        <span onClick={onDelete}> X</span>
+        <span onClick={onDelete} className={classes.delete}> X</span>
     </li>
 );
 
