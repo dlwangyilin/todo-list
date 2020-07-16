@@ -6,3 +6,7 @@
 | Create | POST      | '/api/todos'    |
 | Delete | DELETE    | 'api/todos/:id' |
 | Update | PUT       | 'api/todos/:id' |
+
+
+
+![homepage](./hp.png)
